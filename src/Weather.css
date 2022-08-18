@@ -1,7 +1,19 @@
-body {
-    background-color: #7fa99b;
+.Weather {
+    background-color: white;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
 }
 
-ul {
+.Weather h1 {
+    font-size: 24px;
+    font-weight: 100;
+    line-height: 20px;
+    margin: 5px 0 0 0;
+}
+
+.Weather ul {
+    margin: 0;
+    padding: 0;
     list-style: none;
 }
