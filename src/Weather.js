@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './App.css';
+import './Weather.css';
 import axios from "axios";
 import { Audio } from 'react-loader-spinner';
 
