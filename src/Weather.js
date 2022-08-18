@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import "./Weather.css";
 import axios from "axios";
+import "./Weather.css";
 
+export default function Weather(props) {
+    const [weatherData, setWeatherData] = useState({ ready: false });
 
-export default function Weather() {
-    let [city, setCity] = useState("");
-    let [weather, setWeather] = useState({});
-
-    function showWeather(response) {
-        setWeather({
-            temperature: response.data.min.temp,
+    function handleResponse(response) {
+        console.log(response.data);
+        setWeatherData({
+            ready: true,
+            temperature: "response.data.main.temp",
             description: response.data.weather[0].description,
             precipitation: response.data.precipitation.value,
             humidity: response.data.main.humidity,
@@ -18,49 +18,49 @@ export default function Weather() {
         });
     }
 
-    function handleSearch(event) {
-        event.preventDefault();
+    function search() {
         let apiKey = "7721f2269b88ab04c77bb88ab864eaa3";
-        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-        axios.get(apiUrl).then(showWeather);
+        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.city}&appid=${apiKey}&units=metric`;
+        axios.get(apiUrl).then(handleResponse);
     }
 
-    function updateCity(event) {
-        setCity(event.target.value);
-    }
-
-
-    return (
-        <div className="Weather">
-            <form onSubmit={handleSearch}>
+    if (weatherData.ready) {
+        return (
+            <div className="Weather">
+                <form>
+                    <div className="row">
+                        <div className="col-9">
+                            <input type="search" placeholder="Enter a city" className="form-control" autoFocus="on" />
+                        </div>
+                        <div className="col-3">
+                            <input type="submit" value="Search" className="btn btn-primary w-100"></input>
+                        </div>
+                    </div>
+                </form>
+                <h1>{props.city}</h1>
+                <ul>
+                    <li>Date and hours</li>
+                    <li>Description: {weatherData.description}</li>
+                </ul>
                 <div className="row">
-                    <div className="col-9">
-                        <input type="search" placeholder="Enter a city" className="form-control" onChange={updateCity} />
+                    <div className="col-6">
+                        <img src={weatherData.icon} alt={weatherData.description} />
+                        <span className="temperature">{weatherData.temperature}</span>
+                        <span className="unit">ºC</span>
                     </div>
-                    <div className="col-3">
-                        <input type="submit" value="Search" className="btn btn-primary w-100"></input>
+                    <div className="col-6">
+                        <ul>
+                            <li>Precipitation: {weatherData.precipitation}mm</li>
+                            <li>Humidity: {weatherData.humidity}%</li>
+                            <li>Wind: {weatherData.wind}kn/h</li>
+                        </ul>
                     </div>
-                </div>
-            </form>
-            <h1>{city}</h1>
-            <ul>
-                <li>Date and hours</li>
-                <li>Description: {weather.description}</li>
-            </ul>
-            <div className="row">
-                <div className="col-6">
-                    <img src={weather.icon} alt={weather.description} />
-                    <span className="temperature">{weather.temperature}</span>
-                    <span className="unit">ºC</span>
-                </div>
-                <div className="col-6">
-                    <ul>
-                        <li>Precipitation: {weather.precipitation}mm</li>
-                        <li>Humidity: {weather.humidity}%</li>
-                        <li>Wind: {weather.wind}kn/h</li>
-                    </ul>
                 </div>
             </div>
-        </div>
-    );
+        );
+    } else {
+        search();
+        return "Loading";
+
+    }
 }
