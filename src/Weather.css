@@ -1,4 +1,7 @@
-ul {
+body {
     text-align: center;
+}
+
+ul {
     list-style: none;
 }
