@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './Weather.css';
+import "./Weather.css";
 import axios from "axios";
 
 
@@ -13,6 +13,7 @@ export default function Weather() {
         setWeather({
             temperature: response.data.min.temp,
             description: response.data.weather[0].description,
+            precipitation: response.data.precipitation.value,
             humidity: response.data.main.humidity,
             wind: response.data.wind.speed,
             icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
@@ -32,24 +33,37 @@ export default function Weather() {
 
     let form = (
         <form onSubmit={handleSearch}>
-            <input type="search" placeholder="Enter a city" onChange={updateCity} />
-            <button type="Submit">Search</button>
+            <div className="row">
+                <div className="col-9">
+                    <input type="search" placeholder="Enter a city" className="form-control" onChange={updateCity} />
+                </div>
+                <div className="col-3">
+                    <input type="submit" value="Search" className="btn btn-primary">Search</input>
+                </div>
+            </div>
         </form>
     );
 
     if (loaded) {
         return (
             <div>
-                {form}
+                <h1>{city}</h1>
                 <ul>
-                    <li>Temperature: {weather.temperature}ºC</li>
+                    <li>Date and hours</li>
                     <li>Description: {weather.description}</li>
-                    <li>Humidity: {weather.humidity}%</li>
-                    <li>Wind: {weather.wind}kn/h</li>
-                    <li>
-                        <img src={weather.icon} alt={weather.description} />
-                    </li>
                 </ul>
+                <div className="row">
+                    <div className="col-6">
+                        <img src={weather.icon} alt={weather.description} /> Temperature: {weather.temperature}ºC
+                    </div>
+                    <div className="col-6">
+                        <ul>
+                            <li>Precipitation: {weather.precipitation}mm</li>
+                            <li>Humidity: {weather.humidity}%</li>
+                            <li>Wind: {weather.wind}kn/h</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         );
     } else {
