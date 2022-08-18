@@ -4,7 +4,7 @@ import axios from "axios";
 import { Audio } from 'react-loader-spinner';
 
 
-export default function Weather(props) {
+export default function Weather() {
     let [city, setCity] = useState("");
     let [weather, setWeather] = useState({});
 
@@ -25,7 +25,7 @@ export default function Weather(props) {
     function handleResponse(event) {
         event.preventDefault();
         let apiKey = "7721f2269b88ab04c77bb88ab864eaa3";
-        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.city}&appid=${apiKey}&units=metric`;
+        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
         axios.get(apiUrl).then(showWeather);
     }
 
