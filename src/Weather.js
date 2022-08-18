@@ -42,7 +42,7 @@ export default function Weather() {
             <div>
                 {form}
                 <ul>
-                    <li>`Temperature: ${weather.temperature}ºC`</li>
+                    <li>Temperature: {weather.temperature}ºC</li>
                     <li>Description: {weather.description}</li>
                     <li>Humidity: {weather.humidity}%</li>
                     <li>Wind: {weather.wind}kn/h</li>
