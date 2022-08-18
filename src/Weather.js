@@ -41,7 +41,7 @@ export default function Weather(props) {
                 wrapperClass
             />
             <h2>Weather App</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleResponse}>
                 <input type="search" placeholder="Enter a city" onChange={updateCity} />
                 <input type="submit" value="Search" />
             </form>
