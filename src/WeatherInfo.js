@@ -16,14 +16,13 @@ export default function WeatherInfo(props) {
                         <WeatherIcon code={props.data.icon} alt={props.data.description} />
                     </div>
                     <div className="float-left">
-                        <span className="temperature">{props.data.temperature}</span>
+                        <span className="temperature">{Math.round(props.data.temperature)}</span>
                         <span className="unit">ºC</span>
                     </div>
                 </div>
             </div>
             <div className="col-6">
                 <ul>
-                    <li>Precipitation: {props.data.precipitation}mm</li>
                     <li>Humidity: {props.data.humidity}%</li>
                     <li>Wind: {props.data.wind}kn/h</li>
                 </ul>
