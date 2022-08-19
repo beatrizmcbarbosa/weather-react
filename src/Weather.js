@@ -9,7 +9,7 @@ export default function Weather(props) {
         console.log(response.data);
         setWeatherData({
             ready: true,
-            temperature: "response.data.main.temp",
+            temperature: response.data.main.temp,
             description: response.data.weather[0].description,
             precipitation: response.data.precipitation.value,
             humidity: response.data.main.humidity,
@@ -61,6 +61,5 @@ export default function Weather(props) {
     } else {
         search();
         return "Loading";
-
     }
 }
