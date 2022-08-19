@@ -12,30 +12,26 @@ export default function WeatherInfo(props) {
             <li className="text-capitalize">{props.data.description}</li>
         </ul>
         <div className="row">
-            <div className="col-3">
-                <div className="clearfix">
-                    <div className="float-left">
+            <div className="col-6">
+                <div className="d-flex">
+                    <div>
                         <WeatherIcon
                             code={props.data.icon}
                             alt={props.data.description}
                         />
                     </div>
-                </div>
-            </div>
-            <div className="col-3">
-                <div className="clearfix">
-                    <div className="float-left">
+                    <div>
                         <span className="temperature">
                             {Math.round(props.data.temperature)}
                         </span>
-                        <span className="unit">ºC</span>
+                        <span className="unit"> ºC</span>
                     </div>
                 </div>
             </div>
             <div className="col-6">
                 <ul>
-                    <li>Humidity: {props.data.humidity}%</li>
-                    <li>Wind: {props.data.wind}km/h</li>
+                    <li>Humidity: {props.data.humidity} %</li>
+                    <li>Wind: {props.data.wind} km/h</li>
                 </ul>
             </div>
         </div >
