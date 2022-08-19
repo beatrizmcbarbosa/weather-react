@@ -19,10 +19,11 @@ export default function Weather(props) {
         axios
             .get(apiUrl)
             .then(response => {
-                const { main, dt, weather, wind, name } = response.data;
+                const { coord, main, dt, weather, wind, name } = response.data;
 
                 setWeatherData({
                     ready: true,
+                    coordinates: coord,
                     temperature: main.temp,
                     date: new Date(dt * 1000),
                     description: weather[0].description,
@@ -65,7 +66,7 @@ export default function Weather(props) {
                     </div>
                 </form>
                 <WeatherInfo data={weatherData} />
-                <WeatherForecast />
+                <WeatherForecast coordinates={weatherData.coordinates} />
             </div >
         );
     } else {
