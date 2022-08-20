@@ -1,41 +1,39 @@
-import React from "react";
-import WeatherIcon from "./WeatherIcon";
-import "./WeatherForecast.css";
+import React, { useState } from "react";
+import WeatherForecastDay from "./WeatherForecastDay";
 import axios from "axios";
+import "./WeatherForecast.css";
 
 export default function WeatherForecast(props) {
-    function handleResponse(response) {
-        console.log(response.data);
+    let [loaded, setLoaded] = useState(false);
+    let [forecastData, setForecastData] = useState(null);
+
+    function search() {
+        const apiKey = "7721f2269b88ab04c77bb88ab864eaa3";
+        let lon = props.coordinates.lon;
+        let lat = props.coordinates.lat;
+        let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&&appid=${apiKey}&units=metric`; axios
+            .get(apiUrl)
+            .then(response => {
+                setForecastData(response.data.daily);
+                setLoaded(true);
+            });
+        //         .catch (error => {
+        //         console.log("Error fetching data, ", error);
+        //     });
     }
 
-    const apiKey = "7721f2269b88ab04c77bb88ab864eaa3";
-    let lon = props.coordinates.lon;
-    let lat = props.coordinates.lat;
-    let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-    axios
-        .get(apiUrl)
-        .then(handleResponse);
-
-    return (
-        <div className="WeatherForecast">
-            <div className="row">
-                <div className="col">
-                    <div className="WeatherForecast-day">
-                        Thu
-                    </div>
-                    <WeatherIcon code="01d"
-                        alt="clear"
-                        size={35} />
-                    <div className="WeatherForecast-temperatures">
-                        <span className="WeatherForecast-temperature-max">
-                            19º
-                        </span>
-                        <span className="WeatherForecast-temperature-min">
-                            10º
-                        </span>
+    if (loaded) {
+        return (
+            <div className="WeatherForecast" >
+                <div className="row">
+                    <div className="col">
+                        <WeatherForecastDay data={forecastData[0]} />
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    } else {
+        search();
+        return "Loading...";
+    }
 }
