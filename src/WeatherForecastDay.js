@@ -23,11 +23,10 @@ export default function WeatherForecastDay(props) {
             "Wed",
             "Thu",
             "Fri",
-            "Sat"
-        ]
-
-        return days[day()];
+            "Sat"];
+        return days[day];
     }
+
     return (
         <div>
             <div className="WeatherForecast-day">
