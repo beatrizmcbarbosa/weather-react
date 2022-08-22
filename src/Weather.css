@@ -49,8 +49,4 @@
     .Weather {
         font-size: 15px;
     }
-
-    .Weather .unit {
-        display: none;
-    }
 }
