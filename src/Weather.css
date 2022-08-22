@@ -18,10 +18,10 @@
 }
 
 .Weather h1 {
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 100;
     line-height: 20px;
-    margin: 10px 0 5px 0;
+    margin: 20px 0 10px 0;
 }
 
 .Weather ul {
@@ -42,4 +42,15 @@
 
 .Weather canvas {
     margin-top: 27px;
+}
+
+@media (max-width: 768px) {
+
+    .Weather {
+        font-size: 15px;
+    }
+
+    .Weather .unit {
+        display: none;
+    }
 }
